@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css"> 
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/gif" sizes="16x16">
+    <title>Who am i?</title>
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<body>
+    <header class="navbar">
+        <section id="logo" class="navbar-section">
+            <img class="mr-2" src="{{ url_for('static', filename='logo.svg') }}" height=32 alt="logo"/>
+            <p class="navbar-brand mr-2">Who Am I?</p>
+        </section>
+    </header>
+    <div class="divider"></div>
+    <div id="page" class="container">
+        <section id="form">
+            <h2>Upload Images</h2>
+            <p>Upload images of the person you wish to track. The more pictures you upload the more accurate tracking will be!</p>
+            <form class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-input" id="name" type="text" value="John Smith">
+                <label class="form-label" for="image">File</label>
+                <input class="form-input" id="image" type="file">
+            </form>
+        </section>
+        <section>
+            <h2>Camera Feed</h2>
+            <img id="video" src="{{ url_for('video_feed') }}">
+        </section>    
+    </div>
+</body>
+<script type="text/javascript" src=""></script>
+</html>
+
+<style>
+    #logo {
+        padding-left: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-weight: bold;
+    }
+    #logo p {
+        margin: 0;
+        font-size: 32px;
+        color: #666666;
+        padding-left: 8px;
+    }
+
+    #page {
+        margin: 24px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #form {
+        width: 30%;
+        padding-right: 24px;
+    }
+
+    #video {
+        width: 500px !important;
+        border: 1px solid gray;
+    }
+</style>
