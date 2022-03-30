@@ -3,7 +3,6 @@ import numpy as np
 import face_recognition
 
 
-
 class Face:
     def __init__(self, name, face_location, encoding):
         self.name = name.upper()

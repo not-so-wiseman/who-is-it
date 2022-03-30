@@ -1,21 +1,28 @@
-from flask import Flask, render_template, Response
-from flask_wtf import FlaskForm
+from flask import Flask, render_template, Response, request, send_file
 from .src.camera import camera
 from .src.database import DataBase
-from .src.camera import camera
+from .src.face import Face
+
 
 app = Flask(__name__)
 
 
-class UploadFileForm(FlaskForm):
-    file = FileField("File")
-    submit = SubmitForm("Upload File")
+def Upload(name: str, file):
+    print(file)
+    #img = preprocess_image("{}\\{}".format(IMAGE_DIR, img))
+    #location = face_recognition.face_locations(img)[0]
+    #face = Face.from_image(img, face_location=location, name=name)
+    #db.save_photos_to_db(face)
+  
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
+        print(request.files)
+        name = request.files['name'].replace(' ', '')
         file = request.files['file']
-    return render_template('index.html', form=form)
+        Upload(name, file)
+    return render_template('index.html')
 
 
 @app.route('/video_feed')

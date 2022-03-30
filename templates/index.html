@@ -22,11 +22,12 @@
         <section id="form">
             <h2>Upload Images</h2>
             <p>Upload images of the person you wish to track. The more pictures you upload the more accurate tracking will be!</p>
-            <form class="form-group">
+            <form methods="POST" actions="/" name="file" class="form-group" enctype="multipart/form-data">
                 <label class="form-label" for="name">Name</label>
-                <input class="form-input" id="name" type="text" value="John Smith">
+                <input class="form-input" id="name" name="name" type="text" value="John Smith">
                 <label class="form-label" for="image">File</label>
-                <input class="form-input" id="image" type="file">
+                <input class="form-input" id="image" name="file" type="file">
+                <input id="submit" class="btn btn-primary mt-4" type="submit" value="Submit">
             </form>
         </section>
         <section>
@@ -62,11 +63,15 @@
 
     #form {
         width: 30%;
-        padding-right: 24px;
+        padding-right: 36px;
     }
 
     #video {
         width: 500px !important;
         border: 1px solid gray;
+    }
+
+    #submit {
+        padding-top: 16px;
     }
 </style>
