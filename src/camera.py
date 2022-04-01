@@ -6,7 +6,6 @@ from .face import Face
 from .utils import highlight_face, resize_location, preprocess_image
 from .database import DataBase
 
-IMAGE_DIR = "..\data\images\\"
 RESIZE = 0.25
 
 def camera(data: list):
@@ -39,7 +38,6 @@ def camera(data: list):
         # Hit 'q' on the keyboard to quit!
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
 
     # Release handle to the webcam
     cap.release()

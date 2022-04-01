@@ -1,5 +1,6 @@
 from typing import Tuple
 import numpy as np
+import cv2
 import face_recognition
 
 
@@ -28,8 +29,20 @@ class Face:
 
         return Face(name=name, face_location=location, encoding=encoding)
 
+    def from_byte_string(buffer, name):
+        nparr = np.fromstring(buffer, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR) 
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        face_location = face_recognition.face_locations(img)[0]
+        encoding = face_recognition.face_encodings(img, [face_location])[0]
+        return Face(name=name, face_location=face_location, encoding=encoding)
+
+
     def set_name(self, name):
         self.name = name.upper()
+
+    def __str__(self) -> str:
+        return "name: {}, face locations: {}, encodings: {}...".format(self.name, self.face_location, self.encoding[0:5])
 
     def __eq__(self, others: list) -> bool:
         encodings = [img.encoding for img in others] if isinstance(others, list) else [others.encoding]

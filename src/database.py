@@ -2,7 +2,7 @@ from inspect import istraceback
 import sqlite3
 from .face import Face
 
-DATABASE = "D:\MUN\Term8\8410ComputerVision\Project\who-is-it\data\images.db"
+DATABASE = "C:\\Users\\ewise\\Development\\who-is-it\data\\images.db"
 
 class DataBase:
     def __init__(self):
@@ -16,18 +16,22 @@ class DataBase:
         self.connection.close()
 
     def save_photos_to_db(self, faces: list):
-        assert(isinstance(faces[0], Face))
-        self._open()        
+        try:
+            assert(isinstance(faces[0], Face))
+            self._open()        
 
-        for face in faces:
-            encoding, name, location = face.to_data_base_str()
-            command = "INSERT INTO images VALUES ('{}', '{}', '{}')".format(
-                encoding, name, location
-            )
-            self.cursor.execute(command)
+            for face in faces:
+                encoding, name, location = face.to_data_base_str()
+                command = "INSERT INTO images VALUES ('{}', '{}', '{}')".format(
+                    encoding, name, location
+                )
+                self.cursor.execute(command)
 
-        self.connection.commit()
-        self._close()
+            self.connection.commit()
+            self._close()
+        except:
+            print("Could not save photos to database")
+
 
     def get_faces(self) -> list:
         self._open()
